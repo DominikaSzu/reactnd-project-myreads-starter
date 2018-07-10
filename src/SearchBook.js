@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 class SearchBook extends React.Component {
+    state = {
+        searchQuery: []
+    }
+    
     render () {
         return (
         
