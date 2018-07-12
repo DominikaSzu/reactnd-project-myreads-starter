@@ -1,6 +1,5 @@
 import React from 'react'
 import Book from './Book'
-import App from './App.js'
 
 class Shelf extends React.Component {
     
