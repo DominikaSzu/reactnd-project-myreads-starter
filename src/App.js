@@ -10,15 +10,19 @@ import Shelf from './Shelf'
 class BooksApp extends React.Component {
   
   state = {
-      books: []
+      books: [],
+      currentShelf: 'none' // 'read', 'currentlyReading' or 'wantToRead'    
   } 
     
 
     componentDidMount() {
         BooksAPI.getAll().then((books)=> {
             this.setState({ books })
-            console.log(books)
         })
+    }
+
+    updateShelf = (event) => {
+        console.log(event.target.value)
     }
 
   render() {
@@ -39,9 +43,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf}/>
-                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf}/>
-                <Shelf shelfName="Read" currentShelf={readShelf}/>
+                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} books={ books }/>
+                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} books={ books } />
+                <Shelf shelfName="Read" currentShelf={readShelf} books={ books }/>
               </div>
             </div>
             <div className="open-search">
