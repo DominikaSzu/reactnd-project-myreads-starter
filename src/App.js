@@ -9,8 +9,7 @@ import Shelf from './Shelf'
 class BooksApp extends React.Component {
   
   state = {
-      books: [],
-      currentShelf: 'none' // 'read', 'currentlyReading' or 'wantToRead'    
+      books: [], 
   } 
     
 
@@ -20,9 +19,17 @@ class BooksApp extends React.Component {
         })
     }
 
-    updateShelf = (event) => {
-        console.log(event.target.value)
+    selectShelf = (book, shelf) => {
+        console.log(book, shelf.target.value)
+//        this shows event target value and book chosen from control option on book component 
     }
+
+        
+//        BooksAPI.update(book, shelf).then(() => BooksAPI.getAll()).then((books)=> this.setState({books}))
+//        BooksAPI.update(bookID, newShelf).then((res) => 
+//        console.log(res)
+//        )
+//    }
 
   render() {
       
@@ -42,9 +49,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} books={ books }/>
-                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} books={ books } />
-                <Shelf shelfName="Read" currentShelf={readShelf} books={ books }/>
+                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} books={ books } updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} books={ books } updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Read" currentShelf={readShelf} books={ books } updateShelf={this.selectShelf}/>
               </div>
             </div>
             <div className="open-search">
