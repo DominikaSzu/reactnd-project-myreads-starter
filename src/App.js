@@ -22,14 +22,14 @@ class BooksApp extends React.Component {
     selectShelf = (book, shelf) => {
         console.log(book, shelf.target.value)
 //        this shows event target value and book chosen from control option on book component 
-    }
-
-        
-//        BooksAPI.update(book, shelf).then(() => BooksAPI.getAll()).then((books)=> this.setState({books}))
+        const shelfString = shelf.target.value
+        const updatedBook = BooksAPI.update(book, shelfString)  
+        updatedBook.then((res) => )
+//        BooksAPI.getAll()).then((books)=> this.setState({books}))
 //        BooksAPI.update(bookID, newShelf).then((res) => 
 //        console.log(res)
 //        )
-//    }
+    }
 
   render() {
       
