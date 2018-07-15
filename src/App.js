@@ -9,13 +9,13 @@ import Shelf from './Shelf'
 class BooksApp extends React.Component {
   
   state = {
-      books: [], 
+      booksAll: [], 
   } 
     
 
     componentDidMount() {
         BooksAPI.getAll().then((books)=> {
-            this.setState({ books })
+            this.setState({ booksAll: books })
         })
     }
 
@@ -30,11 +30,15 @@ class BooksApp extends React.Component {
 
   render() {
       
-      let books = this.state.books
-      let currentlyReadingShelf = books.filter((book) => {book.shelf === 'currentlyReading'})
-      let wantToReadShelf = books.filter((book) => {book.shelf === 'wantToRead'})
-      let readShelf = books.filter((book) => {book.shelf === 'read'})
-      
+      let books = this.state.booksAll
+      let currentlyReadingShelf = books.filter((book) => {return book.shelf === 'currentlyReading'})
+      let wantToReadShelf = books.filter((book) => 
+      {return book.shelf === 'wantToRead'})
+      let readShelf = books.filter((book) => {return book.shelf === 'read'})
+      console.log(currentlyReadingShelf)
+      console.log(wantToReadShelf)
+      console.log(readShelf)
+      console.log(books, books[0])
     return (
       <div className="app">
         
@@ -46,9 +50,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} books={ books } updateShelf={this.selectShelf}/>
-                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} books={ books } updateShelf={this.selectShelf}/>
-                <Shelf shelfName="Read" currentShelf={readShelf} books={ books } updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Read" currentShelf={readShelf} updateShelf={this.selectShelf}/>
               </div>
             </div>
             <div className="open-search">
