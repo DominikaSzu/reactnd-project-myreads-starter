@@ -9,7 +9,7 @@ import Shelf from './Shelf'
 class BooksApp extends React.Component {
   
   state = {
-      booksAll: [], 
+      booksAll: []
   } 
     
 
@@ -19,26 +19,25 @@ class BooksApp extends React.Component {
         })
     }
 
-    selectShelf = (book, event) => {
+    selectShelf (book, event) {
 //        this shows event target value and book chosen from control option on book component 
         const shelf = event.target.value
-        const updatedBook = BooksAPI.update(book, shelf)  
-        updatedBook.then(BooksAPI.getAll().then((books) => {
+        
+        const updatedBooks = BooksAPI.update(book, shelf)  
+        updatedBooks.then(BooksAPI.getAll().then((books) => {
             this.setState({ books: books })
+            console.log(this.state.books)
         }))
     }
 
   render() {
       
       let books = this.state.booksAll
-      let currentlyReadingShelf = books.filter((book) => {return book.shelf === 'currentlyReading'})
-      let wantToReadShelf = books.filter((book) => 
+      let currentlyReadingShelf = this.state.booksAll.filter((book) => {return book.shelf === 'currentlyReading'})
+      let wantToReadShelf = this.state.booksAll.filter((book) => 
       {return book.shelf === 'wantToRead'})
-      let readShelf = books.filter((book) => {return book.shelf === 'read'})
-      console.log(currentlyReadingShelf)
-      console.log(wantToReadShelf)
-      console.log(readShelf)
-      console.log(books, books[0])
+      let readShelf = this.state.booksAll.filter((book) => {return book.shelf === 'read'})
+
     return (
       <div className="app">
         
@@ -50,9 +49,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} updateShelf={this.selectShelf}/>
-                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} updateShelf={this.selectShelf}/>
-                <Shelf shelfName="Read" currentShelf={readShelf} updateShelf={this.selectShelf}/>
+                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} updateShelf={this.selectShelf.bind(this)}/>
+                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} updateShelf={this.selectShelf.bind(this)}/>
+                <Shelf shelfName="Read" currentShelf={readShelf} updateShelf={this.selectShelf.bind(this)}/>
               </div>
             </div>
             <div className="open-search">
