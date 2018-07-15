@@ -64,7 +64,7 @@ class SearchBook extends React.Component {
                    <Book key={book.id} book={book} updateShelf={this.props.updateShelf} />
               })) : (
                   <div>
-                    <img src='https://bit.ly/2L07YJN' height='200px' width='200px' style={{ textAlign: 'center' }}/>
+                    <img src='https://bit.ly/2L07YJN' height='200px' width='200px' style={{ textAlign: 'center' }} alt="Sad face"/>
                   <p style={{ textAlign: 'center' }}>Sorry, no results found.</p>
                   </div>
               )}
