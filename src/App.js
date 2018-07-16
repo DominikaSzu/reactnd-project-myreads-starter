@@ -9,7 +9,10 @@ import Shelf from './Shelf'
 class BooksApp extends React.Component {
   
   state = {
-      booksAll: []
+      booksAll: [],
+      query: '',
+      searchedBook: [],
+      foundBooks: true
   } 
     
 
@@ -29,6 +32,30 @@ class BooksApp extends React.Component {
             console.log(this.state.books)
         }))
     }
+
+    updateQuery = (query) => {
+        this.setState({ query: query.trim() })
+        
+        if (query !==  '') {
+            BooksAPI.search(query).then((response) =>{
+                response.map(resBook => {
+                    this.setState({ foundBooks: true })
+                    
+                    if (resBook.shelf === undefined) {
+                    resBook.shelf = 'none';
+                } 
+                    if (resBook.imageLinks === undefined) {
+                        resBook.imageLinks = `url(http://via.placeholder.com/128x193?text=?)`
+                    }
+                    
+                    this.setState({ searchedBook: response })
+                })
+            }).catch((error) => {
+                this.setState({ foundBooks: false })
+                this.setState({ searchedBook: [] })
+            }) 
+        }}
+
 
   render() {
       
@@ -62,8 +89,13 @@ class BooksApp extends React.Component {
     )}
         />
         
-        <Route path="/search" component={SearchBook}
-        />
+        <Route path="/search" render={(state) => (
+           <SearchBook 
+                query={this.state.query} 
+                searchedBook={this.state.searchedBook} foundBooks={this.state.foundBooks}
+                updateQuery={this.updateQuery.bind(this)}
+        />                              
+        )}/>
       </div>
     )
   }
