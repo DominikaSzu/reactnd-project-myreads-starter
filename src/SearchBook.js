@@ -32,7 +32,7 @@ class SearchBook extends React.Component {
                   
                   { this.props.foundBooks ? 
                   (searchedBooks.map((book) => {   
-                   <Book key={book.id} book={book} updateShelf={this.props.updateShelf} />
+                   <Book key={book.id} book={book} books={searchedBooks} updateShelf={this.props.updateShelf} />
               })) : (
                   <div>
                     <img src='https://bit.ly/2L07YJN' height='200px' width='200px' style={{ textAlign: 'center' }} alt="Sad face"/>
