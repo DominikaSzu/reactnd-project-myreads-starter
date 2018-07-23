@@ -78,9 +78,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" books={currentlyReadingShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
-                <Shelf shelfName="Want to Read" books={wantToReadShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
-                <Shelf shelfName="Read" books={readShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
+                <Shelf shelfName="Currently Reading" currentShelf={currentlyReadingShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
+                <Shelf shelfName="Want to Read" currentShelf={wantToReadShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
+                <Shelf shelfName="Read" currentShelf={readShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
               </div>
             </div>
             <div className="open-search">
