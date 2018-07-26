@@ -22,14 +22,16 @@ class BooksApp extends React.Component {
         })
     }
 
-    selectShelf (book, event) {
-//        this shows event target value and book chosen from control option on book component 
+    selectShelf = (book, event) => {
+        //        this shows event target value and book chosen from control option on book component 
         const shelf = event.target.value
         
         const updatedBooks = BooksAPI.update(book, shelf)  
-        updatedBooks.then(BooksAPI.getAll().then((books) => {
-            this.setState({ books: books })
-        }))
+        updatedBooks.then(()=> {
+            BooksAPI.getAll().then((books) =>
+            this.setState({ booksAll: books })
+        )})
+
     }
 
     updateQuery = (query) => {
@@ -78,9 +80,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Currently Reading" books={currentlyReadingShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
-                <Shelf shelfName="Want to Read" books={wantToReadShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
-                <Shelf shelfName="Read" books={readShelf} updateShelf={this.selectShelf.bind(this)} booksAll={this.state.booksAll}/>
+                <Shelf shelfName="Currently Reading" books={currentlyReadingShelf} updateShelf={this.selectShelf} booksAll={this.state.booksAll} />
+                <Shelf shelfName="Want to Read" books={wantToReadShelf} updateShelf={this.selectShelf} booksAll={this.state.booksAll} />
+                <Shelf shelfName="Read" books={readShelf} updateShelf={this.selectShelf} booksAll={this.state.booksAll}/>
               </div>
             </div>
             <div className="open-search">
