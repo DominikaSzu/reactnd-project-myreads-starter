@@ -19,6 +19,19 @@ class BooksApp extends React.Component {
     componentDidMount() {
         BooksAPI.getAll().then((books)=> {
             this.setState({ booksAll: books })
+            
+            books.map((book) => {
+              if (book.shelf === undefined) {
+                    book.shelf = 'none';
+                } 
+            if (book.imageLinks === undefined) {
+                book.imageLinks.thumbnail = `url(http://via.placeholder.com/128x193?text=?)`
+            }  
+            
+            if (book.authors === undefined) {
+                book.authors = 'somebody'
+            }
+            })
         })
     }
 
@@ -47,7 +60,7 @@ class BooksApp extends React.Component {
                     resBook.shelf = 'none';
                 } 
                     if (resBook.imageLinks === undefined) {
-                        resBook.imageLinks = `url(http://via.placeholder.com/128x193?text=?)`
+                        resBook.imageLinks.thumbnail = `url(http://via.placeholder.com/128x193?text=?)`
                     }
                     
                     this.setState({ searchedBook: response })
