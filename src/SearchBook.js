@@ -10,9 +10,14 @@ class SearchBook extends React.Component {
             
             let searchedBooks = this.props.searchedBook
             let query = this.props.query
-            console.log(query)
             console.log(searchedBooks)
-        
+            console.log(query)
+            
+            if (query === '') {
+                console.log(searchedBooks)
+                searchedBooks= []
+                console.log(searchedBooks)
+            }
             
         return (
             
@@ -21,7 +26,7 @@ class SearchBook extends React.Component {
               <Link className="close-search" 
             to="/">Close</Link>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" value={this.props.query} onChange={(event) => this.props.updateQuery(event.target.value)
+                <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => this.props.updateQuery(event.target.value)
             
                 }/>
               </div>

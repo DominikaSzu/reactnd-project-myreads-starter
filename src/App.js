@@ -35,7 +35,7 @@ class BooksApp extends React.Component {
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query.trim() })
+        this.setState({ query: query })
         let searchedBooks = this.state.searchedBook
         console.log(searchedBooks)
         if (query !==  '') {
@@ -56,7 +56,12 @@ class BooksApp extends React.Component {
                 this.setState({ foundBooks: false })
                 this.setState({ searchedBook: [] })
             }) 
-        }}
+        } else {
+            if (query === '') {
+                this.setState({ searchedBook: [] })
+            }
+        }
+    }
 
 
   render() {
