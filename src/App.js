@@ -36,6 +36,14 @@ class BooksApp extends React.Component {
     selectShelf = (book, event) => {
         //        this shows event target value and book chosen from control option on book component 
         const shelf = event.target.value
+        const books = this.state.Allbooks
+        
+        book.shelf = shelf
+        
+        this.setState({
+            books
+        })
+        
         
         const updatedBooks = BooksAPI.update(book, shelf)  
         updatedBooks.then(()=> {
@@ -45,20 +53,28 @@ class BooksApp extends React.Component {
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query })
-        let searchedBooks = this.state.searchedBook
+        this.setState({ query: query });
+        let searchedBooks = this.state.searchedBook;
+        const booksAll = this.state.booksAll
+
 
         if (query !==  '') {
             BooksAPI.search(query).then((response) =>{
                 response.map(resBook => {
                     this.setState({ foundBooks: true })
-                    
+
                     if (resBook.shelf === undefined) {
                     resBook.shelf = 'none';
                 } 
                     if (resBook.imageLinks === undefined) {
                         resBook.imageLinks.thumbnail = `url(http://via.placeholder.com/128x193?text=?)`
                     }
+                    
+                    for (let i=0; i< booksAll.length; i++) {
+                        if (resBook.id === booksAll[i].id) {
+                            resBook.shelf = booksAll[i].shelf
+                        }
+                    }      
                     
                     this.setState({ searchedBook: response })
                 })
