@@ -21,9 +21,7 @@ class BooksApp extends React.Component {
             this.setState({ booksAll: books })
             
             books.map((book) => {
-              if (book.shelf === undefined) {
-                    book.shelf = 'none';
-                } 
+     
             if (book.imageLinks === undefined) {
                 book.imageLinks.thumbnail = `url(http://via.placeholder.com/128x193?text=?)`
             }  
@@ -44,13 +42,12 @@ class BooksApp extends React.Component {
             BooksAPI.getAll().then((books) =>
             this.setState({ booksAll: books })
         )})
-
     }
 
     updateQuery = (query) => {
         this.setState({ query: query })
         let searchedBooks = this.state.searchedBook
-        console.log(searchedBooks)
+
         if (query !==  '') {
             BooksAPI.search(query).then((response) =>{
                 response.map(resBook => {
@@ -83,9 +80,6 @@ class BooksApp extends React.Component {
       let wantToReadShelf = this.state.booksAll.filter((book) => 
       {return book.shelf === 'wantToRead'})
       let readShelf = this.state.booksAll.filter((book) => {return book.shelf === 'read'})
-      console.log(currentlyReadingShelf)
-      console.log(wantToReadShelf)
-      console.log(readShelf)
 
     return (
       <div className="app">

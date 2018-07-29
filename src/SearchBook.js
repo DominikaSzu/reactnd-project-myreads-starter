@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import App from './App.js'
 import Book from './Book'
+import Shelf from './Shelf'
 
 class SearchBook extends React.Component {
 
@@ -10,14 +11,11 @@ class SearchBook extends React.Component {
             
             let searchedBooks = this.props.searchedBook
             let query = this.props.query
-            console.log(searchedBooks)
-            console.log(query)
             
             if (query === '') {
-                console.log(searchedBooks)
                 searchedBooks= []
-                console.log(searchedBooks)
             }
+
             
         return (
             
@@ -27,7 +25,6 @@ class SearchBook extends React.Component {
             to="/">Close</Link>
               <div className="search-books-input-wrapper">
                 <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => this.props.updateQuery(event.target.value)
-            
                 }/>
               </div>
             </div>   
@@ -37,9 +34,7 @@ class SearchBook extends React.Component {
                   
                   { this.props.foundBooks ? 
                   ( <div>
-                   <Book books={searchedBooks}
-                    updateShelf={this.props.updateShelf}
-                    />
+                    <Shelf books={searchedBooks} updateShelf={this.props.updateShelf} />
                   </div>
               ) : (
                   <div>
